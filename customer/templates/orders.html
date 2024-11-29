@@ -1,0 +1,62 @@
+{% extends 'navbar.html'%}
+{%block nav%}
+{%if messages%}
+{%for i in messages%}
+{% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+     </div>
+{%endif%}
+{% if i.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+    </div>
+{%endif%}
+{%endfor%}
+{%endif%}
+<h1 class="my-3">Orders</h1>
+{%if orders%}
+<div class="d-flex flex-column align-item-center ">
+    {%for i in orders%}
+    <div class="container shadow border border-3 row">
+        <div class="col">
+            <img src="{{i.product.image.url}}"class="img-fluid">
+        </div>
+        <div class="col">
+            <h3>{{i.product.title}}</h3>
+            <h5>Unitprice:{{i.product.price}}</h5>
+            <h5>Quatity{{i.product.quality}}</h5>
+            <h5>Orderdate{{i.product.datetime}}</h5>
+            <h4>
+               {%if i.status == 'orderplaced'%}
+               <span class="text-success">{{i.status}}</span>
+               <a href="{% url 'ordercancel' %}" class="btn btn-outline-danger">Cancel order</a>
+               {%endif%}
+               {%if i.status == 'Shipped'%}
+               <span class="text-success">{{i.status}}</span>
+               <a href="" class="btn btn-outline-danger">Cancel order</a>
+               {%endif%}
+               {%if i.status == 'Outfordelivery'%}
+               <span class="text-success">{{i.status}}</span>
+               
+               {%endif%}
+               {%if i.status == 'Delivered'%}
+               <span class="text-success">{{i.status}}</span>
+              
+               {%endif%}
+               {%if i.status == 'Cancelled'%}
+               <span class="text-success">{{i.status}}</span>
+               
+               {%endif%}
+            </h4>
+        
+        </div>
+    {%endfor%}
+    </div>
+</div>
+{%else%}
+  <h3 class="text center text-warning my-4">No order placed</h3>
+{%endif%}
+{% endblock nav%}

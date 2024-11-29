@@ -1,0 +1,45 @@
+{%extends 'navbar.html'%}
+{% block nav%}
+{%if messages%}
+{%for i in messages%}
+{% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+     </div>
+{%endif%}
+{% if i.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+    </div>
+{%endif%}
+{%endfor%}
+{%endif%}
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="row border shadow p-2 container border-3" style="height: 90vh;">
+        <div class="col d-flex align-items-center justify-content-center">
+            <img src="{{product.image.url}}" class="img-fluid">
+
+        </div>
+        <div class="col d-flex flex-column justify-content-center text-center">
+            <h1>{{product.title}}</h1>
+            <p>{{product.description}}</p>
+            <h6>Rs{{product.price}}</h6>
+            <p>category:{{product.category}}</p>
+            <div class="d-grid">
+                
+                <a href="{%url 'padd' product.id%}" class="btn btn-outline-success" >Add to cart
+                    <i class="fa-solid fa-cart-shopping" style="color: #293829;"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+
+{%endblock nav%}
